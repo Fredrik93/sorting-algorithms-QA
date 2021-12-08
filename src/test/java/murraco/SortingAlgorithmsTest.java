@@ -3,6 +3,9 @@ package murraco;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import com.pholser.junit.quickcheck.Property;
+import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
+import org.junit.runner.RunWith;
 
 import org.junit.Test;
 
@@ -20,6 +23,7 @@ public class SortingAlgorithmsTest {
     final Integer[] data = {4, 3, 0, 11, 7, 5, 15, 12, 99, 1};
     BubbleSort.bubbleSort(data);
     assertEquals("[0, 1, 3, 4, 5, 7, 11, 12, 15, 99]", Arrays.toString(data));
+    System.out.println("Det fonkar");
   }
 
 
