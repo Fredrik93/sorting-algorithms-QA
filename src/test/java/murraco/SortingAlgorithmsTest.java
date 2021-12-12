@@ -7,7 +7,8 @@ import com.pholser.junit.quickcheck.Property;
 import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.generator.NullAllowed;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
-import com.sun.istack.internal.Nullable;
+//import com.sun.istack.internal.Nullable;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
@@ -165,5 +166,17 @@ public class SortingAlgorithmsTest {
         catch (NullPointerException e){
             assertNull(data);
         }
+    }
+
+    @Test(expected = NegativeArraySizeException.class)
+    public void shouldThrowNegativeArrayException(){
+        Integer [] data = new Integer[-2];
+        BubbleSort.bubbleSort(data);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowNullPointerException(){
+        Integer [] data = new Integer[2];
+        BubbleSort.bubbleSort(data);
     }
 }
