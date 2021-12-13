@@ -16,7 +16,7 @@ public class Quicksort {
   }
 
   public static <T extends Comparable<T>> int partition(T[] arr, int start, int end) {
-    int pivotIndex = pickPivotIndex(start, end);
+    int pivotIndex = pickPivotIndex(start, end, Math.random());
     T pivot = arr[pivotIndex];
     swap(arr, pivotIndex, end);
     int index = start;
@@ -30,8 +30,8 @@ public class Quicksort {
     return index;
   }
 
-  public static int pickPivotIndex(int start, int end) {
-    return (int) (start + (end - start + 1) * Math.random());
+  public static int pickPivotIndex(int start, int end, double rand) {
+    return (int) (start + (end - start + 1) * rand);
   }
 
   public static <T extends Comparable<T>> void swap(T[] arr, int i, int j) {

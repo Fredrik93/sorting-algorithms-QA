@@ -30,7 +30,6 @@ public class QuicksortTest {
     }
 
 
-
     @Property
     public void shouldSortStrings(String[] data) {
         //System.out.println(Arrays.toString(data));
@@ -111,5 +110,12 @@ public class QuicksortTest {
     public void shouldThrowNullPointerException() {
         Integer[] data = new Integer[2];
         Quicksort.quickSort(data);
+    }
+
+    @Test
+    public void testPickPivotIndex() {
+        int expectedIndex = 11;
+        int actualIndex = Quicksort.pickPivotIndex(0,10,1);
+        assertEquals(actualIndex, expectedIndex);
     }
 }
