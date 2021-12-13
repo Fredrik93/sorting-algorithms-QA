@@ -99,12 +99,21 @@ public class HeapsortTest {
 
     @Property
     public void shouldSortListWithNulls(@NullAllowed(probability = 0.1f) Integer[] data) {
-        //System.out.println(Arrays.toString(data));
         try {
+            if(data.length != 0){
+                data [data.length-1] = null;
+            }
             Integer[] copy = data.clone();
-            Heapsort.heapSort(copy);
+            if(data.length > 1){
+                try{
+                    Heapsort.heapSort(copy);
+                }catch (NullPointerException e){
+                    e.getMessage();
+                    return;
+                }
+            }
             Arrays.sort(data);
-
+            // System.out.println(Arrays.toString(data));
             assertArrayEquals(copy, data);
         } catch (NullPointerException e) {
             assertNull(data);
