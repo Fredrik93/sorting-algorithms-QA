@@ -1,13 +1,9 @@
 package murraco;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.pholser.junit.quickcheck.Property;
-import com.pholser.junit.quickcheck.generator.InRange;
-import com.pholser.junit.quickcheck.generator.NullAllowed;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
-//import com.sun.istack.internal.Nullable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -78,29 +74,6 @@ public class MergeSortTest {
         assertArrayEquals(copy, data);
     }
 
-    @Property
-    public void shouldSortListWithNulls(@NullAllowed(probability = 0.1f) Integer[] data) {
-        try {
-            if(data.length != 0){
-                data [data.length-1] = null;
-            }
-            Integer[] copy = data.clone();
-            if(data.length > 1){
-                try{
-                    MergeSort.mergeSort(copy);
-                }catch (NullPointerException e){
-                    e.getMessage();
-                    return;
-                }
-            }
-            Arrays.sort(data);
-            // System.out.println(Arrays.toString(data));
-            assertArrayEquals(copy, data);
-        } catch (NullPointerException e) {
-            assertNull(data);
-        }
-    }
-
     @Test(expected = NegativeArraySizeException.class)
     public void shouldThrowNegativeArrayException() {
         Integer[] data = new Integer[-2];
@@ -108,8 +81,21 @@ public class MergeSortTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldThrowNullPointerException() {
+    public void nullElementShouldThrow() {
         Integer[] data = new Integer[2];
         MergeSort.mergeSort(data);
+    }
+
+    @Test
+    public void shouldNotThrowNullPointerException() {
+        Integer[] data = new Integer[1];
+        MergeSort.mergeSort(data);
+        Integer[] arr = {null};
+        assertArrayEquals(data,arr);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void nullArrayShouldThrow() {
+        MergeSort.mergeSort(null);
     }
 }
