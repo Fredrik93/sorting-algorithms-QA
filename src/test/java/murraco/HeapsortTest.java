@@ -1,5 +1,6 @@
 package murraco;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -75,6 +76,25 @@ public class HeapsortTest {
         Arrays.sort(data);
 
         assertArrayEquals(copy, data);
+    }
+
+    @Property
+    public void shouldSwapLeastNumberOfTimesPossible(Integer[] data) {
+        for (int i = 0; i < data.length; i++) {
+            data[i] = data[0];
+        }
+        //System.out.println(Arrays.toString(data));
+        Integer[] copy = data.clone();
+        Heapsort.heapSort(copy);
+        Arrays.sort(data);
+
+        int expectedSwaps = 0;
+        int realSwaps = Heapsort.getNumberOfSwaps();
+        if(data.length != 0){
+            expectedSwaps = data.length - 1;
+        }
+
+        assertEquals(realSwaps, expectedSwaps);
     }
 
     @Property
