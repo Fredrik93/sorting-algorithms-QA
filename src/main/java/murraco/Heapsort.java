@@ -2,8 +2,11 @@ package murraco;
 
 public class Heapsort {
 
+  static private int numberOfSwaps = 0;
+
   // Time complexity: O(n*log(n)) - Space complexity: O(1)
   public static <T extends Comparable<T>> void heapSort(T[] arr) {
+    numberOfSwaps = 0;
     buildMaxHeap(arr);
     int heapSize = arr.length - 1;
     for (int i = arr.length - 1; i > 0; i--) {
@@ -39,6 +42,10 @@ public class Heapsort {
     T temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
+    numberOfSwaps++;
   }
 
+  public static int getNumberOfSwaps(){
+    return numberOfSwaps;
+  }
 }
